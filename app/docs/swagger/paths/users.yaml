@@ -1,0 +1,398 @@
+/api/users/:
+  get:
+    tags:
+      - Users
+    description: Lista todos los usuarios
+    operationId: GetUsers
+    parameters:
+      - in: query
+        name: page
+        schema:
+          type: string
+        description: Número de página
+      - in: query
+        name: per_page
+        schema:
+          type: string
+        description: Cantidad por página
+      - in: query
+        name: pagination
+        schema:
+          type: boolean
+        description: Habilitar paginación
+      - in: query
+        name: active
+        schema:
+          type: boolean
+        description: Filtrar por estado de usuario
+      - in: query
+        name: email
+        schema:
+          type: string
+        description: Filtrar por email de usuario
+    responses:
+      200:
+        description: OK
+        content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User" 
+      400:
+        description: Bad Request
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+      401:
+        description: Acceso no Autorizado
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+      404:
+        description: Not Found
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+      405:
+        description: Not Allowed
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+      500:
+        description: Internal Server Error
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+
+    x-codegen-request-body-name: body
+  post:
+    tags:
+      - Users
+    description: Crear Nuevo Usuario
+    operationId: PostUser
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              firstName:
+                type: string
+                minLength: 2
+              lastName:
+                type: string
+                minLength: 2
+              phone:
+                type: string
+              email:
+                type: string
+              password:
+                type: string
+              roles:
+                type: array
+                items:
+                  type: integer
+                  format: int32
+      required: true
+    responses:
+      201:
+        description: CREATED
+        content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User" 
+      400:
+        description: Bad Request
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+      401:
+        description: Acceso no Autorizado
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+      404:
+        description: Not Found
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+      405:
+        description: Not Allowed
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+      500:
+        description: Internal Server Error
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+
+    x-codegen-request-body-name: body
+/api/users/{id}/:
+  get:
+    tags:
+      - Users
+    description: Listar un Usuario específico
+    operationId: GetOneUser
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+          format: int32
+        description: Id de Usuario
+        required: true
+    responses:
+      200:
+        description: OK
+        content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User" 
+      400:
+        description: Bad Request
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+      401:
+        description: Acceso no Autorizado
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+      404:
+        description: Not Found
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+      405:
+        description: Not Allowed
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+      500:
+        description: Internal Server Error
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+
+    x-codegen-request-body-name: body
+  put:
+    tags:
+      - Users
+    description: Actualizar un Usuario
+    operationId: UpdateUser
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+          format: int32
+        description: Id de Usuario
+        required: true
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              firstName:
+                type: string
+                minLength: 2
+              lastName:
+                type: string
+                minLength: 2
+              phone:
+                type: string
+              email:
+                type: string
+              isActive:
+                type: boolean
+              roles:
+                type: array
+                items:
+                  type: integer
+                  format: int32
+              password:
+                type: string
+      required: true
+    responses:
+      200:
+        description: OK
+        content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User" 
+      400:
+        description: Bad Request
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+      401:
+        description: Acceso no Autorizado
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+      404:
+        description: Not Found
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+      405:
+        description: Not Allowed
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+      500:
+        description: Internal Server Error
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+
+    x-codegen-request-body-name: body
+  delete:
+    tags:
+      - Users
+    description: Eliminar un Usuario
+    operationId: DeleteUser
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+          format: int32
+        description: Id de Usuario
+        required: true
+    responses:
+      200:
+        description: Usuario eliminado correctamente
+        content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                description: Usuario eliminado correctamente
+      400:
+        description: Bad Request
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+      401:
+        description: Acceso no Autorizado
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+      404:
+        description: Not Found
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+      405:
+        description: Not Allowed
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+      500:
+        description: Internal Server Error
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+
+    x-codegen-request-body-name: body
+/api/users/change/password/{id}/:
+  post:
+    tags:
+      - Users
+    description: Cambiar contraseña de un usuario
+    operationId: ChangePasswordUser
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+          format: int32
+        description: Id de Usuario
+        required: true
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              oldPassword:
+                type: string
+              newPassword:
+                type: string
+                minLength: 7
+              confirmPassword:
+                type: string
+      required: true
+    responses:
+      200:
+        description: Contraseña actualizada correctamente
+        content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                description: Contraseña actualizada correctamente
+      400:
+        description: Bad Request
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+      401:
+        description: Acceso no Autorizado
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+      404:
+        description: Not Found
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+      405:
+        description: Not Allowed
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+      500:
+        description: Internal Server Error
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+
+    x-codegen-request-body-name: body
+

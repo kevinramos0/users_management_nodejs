@@ -1,0 +1,145 @@
+/api/auth/login:
+  post:
+    tags:
+      - Authentication
+    description: EndPoint para inicio de sesion de usuarios activos
+    operationId: Login
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Login" 
+      required: true
+    responses:
+      200:
+        description: OK
+        content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User" 
+      400:
+        description: Bad Request
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+      401:
+        description: Acceso no Autorizado
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+      404:
+        description: Not Found
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+      405:
+        description: Not Allowed
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+      500:
+        description: Internal Server Error
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+
+    x-codegen-request-body-name: body
+/api/auth/refresh-token/:
+  post:
+    tags:
+      - Authentication
+    description: EndPoint para renovar token de acceso
+    operationId: RefreshToken
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              tokenRefresh:
+                type: string
+      required: true
+    responses:
+      200:
+        description: OK
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      400:
+        description: Bad Request
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+      401:
+        description: Acceso no Autorizado
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+      404:
+        description: Not Found
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+      405:
+        description: Not Allowed
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+      500:
+        description: Internal Server Error
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+
+    x-codegen-request-body-name: body
+/api/auth/logout/:
+  post:
+    tags:
+      - Authentication
+    description: Cerrar sesion
+    operationId: Logout
+    responses:
+      200:
+        description: OK
+        content: {}
+      400:
+        description: Bad Request
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+      401:
+        description: Acceso no Autorizado
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+      404:
+        description: Not Found
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+      405:
+        description: Not Allowed
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+      500:
+        description: Internal Server Error
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"

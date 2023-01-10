@@ -1,0 +1,25 @@
+openapi: 3.0.0
+info:
+  title: Management Users API REST
+  version: 1.0.0
+  description:
+    API para el manejo de usuarios desarrollada con Express, PostgresSQL, JWT y Swagger
+  license:
+    name: MIT
+    url: https://spdx.org/licenses/MIT.html
+  contact:
+    name: Kevin Ramos,
+    url: https://logrocket.com
+    email: kevin@email.com
+paths:
+  $include: "./paths/paths.yaml"
+components:
+  schemas:
+    $include: "./schemas/schemas.yaml"
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - bearerAuth: []

@@ -1,10 +1,6 @@
 # compiled output
 /dist
-<<<<<<< HEAD
 /node_modules
-=======
-# /node_modules
->>>>>>> aac9cb4b (add git ignore)
 .env
 
 # Logs

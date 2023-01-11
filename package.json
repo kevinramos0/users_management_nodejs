@@ -8,7 +8,7 @@
     "build": "babel app.mjs -d dist",
     "serve": "webpack --config webpack.config.js",
     "start": "nodemon app.mjs",
-    "swagger": "yamlinc -o ./app/docs/index.yaml ./app/docs/swagger/includes.yaml && yaml2json ./app/docs/index.yaml > ./app/docs/index.json",
+    "swagger": "yamlinc -o ./src/docs/index.yaml ./src/docs/swagger/includes.yaml && yaml2json ./src/docs/index.yaml > ./src/docs/index.json",
     "migrate:generate": "sequelize-cli migration:generate --name",
     "migrate": "sequelize-cli db:migrate",
     "seed": "sequelize-cli db:seed:all",
@@ -25,6 +25,7 @@
     "ajv-formats": "^2.1.1",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.0",
+    "compression": "^1.7.4",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "dotenv-webpack": "^8.0.1",
@@ -57,6 +58,7 @@
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.26.0",
     "nodemon": "^2.0.19",
+    "prettier": "^2.8.2",
     "sequelize-cli": "^6.4.1",
     "webpack-cli": "^4.10.0"
   }

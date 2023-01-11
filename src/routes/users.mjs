@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import CheckAuth from '../middlewares/auth.mjs';
-import checkRole from '../middlewares/rol.mjs';
+// import checkRole from '../middlewares/rol.mjs';
 import ValidateSchema from '../middlewares/ValidateSchemasAjv.mjs';
 import { createUserSchema, updateUserSchema } from '../validators/userSchema.mjs';
 import asyncHandler from '../middlewares/tryCatch.mjs';
@@ -20,7 +20,6 @@ router.post(
   [CheckAuth, ValidateSchema(changePasswordSchema)],
   asyncHandler(UserController.changePassword),
 );
-
 
 router.get(
   '/:id',

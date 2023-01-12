@@ -5,7 +5,7 @@ import { User, RefreshToken } from '../models/index.mjs';
 
 // export default class ChechAuth {
 // eslint-disable-next-line consistent-return
-const ChechAuth = async (req, res, next) => {
+const CheckAuth = async (req, res, next) => {
   try {
     // buscar el la cabezera de la solicitud si posee token
     let { authorization } = req.headers;
@@ -28,7 +28,7 @@ const ChechAuth = async (req, res, next) => {
     // verificar si existe el refresh token
     const existRefreskToken = await RefreshToken.findOne({
       where: { id_user: user.id },
-      order: ['id', 'DESC'],
+      order: [['id', 'DESC']],
     });
     if (!existRefreskToken) { return res.status(StatusCode.Unauthenticated).json({ message: 'refresh Token invalid' }); }
 
@@ -48,4 +48,4 @@ const ChechAuth = async (req, res, next) => {
   }
 };
 
-export default ChechAuth;
+export default CheckAuth;

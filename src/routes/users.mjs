@@ -1,43 +1,48 @@
 import { Router } from 'express';
 import CheckAuth from '../middlewares/auth.mjs';
-// import checkRole from '../middlewares/rol.mjs';
+import checkRole from '../middlewares/rol.mjs';
 import ValidateSchema from '../middlewares/ValidateSchemasAjv.mjs';
 import { createUserSchema, updateUserSchema } from '../validators/userSchema.mjs';
 import asyncHandler from '../middlewares/tryCatch.mjs';
 import UserController from '../controllers/usersController.mjs';
 import changePasswordSchema from '../validators/changePasswordSchema.mjs';
+import Rols from '../utils/enumRoles.mjs';
 
 const router = Router();
 
-router.get(
-  '/',
-  // [CheckAuth, checkRole(['SuperAdmin', 'Administrador', 'Usuario'])],
-  asyncHandler(UserController.findAll),
-);
+router.get('/', [CheckAuth, checkRole([Rols.adminGetUser])], asyncHandler(UserController.findAll));
 
 router.post(
   '/change/password',
-  [CheckAuth, ValidateSchema(changePasswordSchema)],
+  [
+    CheckAuth,
+    checkRole(Rols.adminUpdateUser, Rols.updateUser),
+    ValidateSchema(changePasswordSchema),
+  ],
   asyncHandler(UserController.changePassword),
 );
 
 router.get(
   '/:id',
-  // [CheckAuth, checkRole(['SuperAdmin', 'Administrador', 'Usuario'])],
+  [CheckAuth, checkRole([Rols.adminGetUser, Rols.getUser])],
   asyncHandler(UserController.findOne),
 );
 
-router.post('/', [ValidateSchema(createUserSchema)], asyncHandler(UserController.createUser));
+router.post(
+  '/',
+  [CheckAuth, checkRole([Rols.adminCreateUser, Rols.createUser]), ValidateSchema(createUserSchema)],
+  asyncHandler(UserController.createUser),
+);
 
 router.put(
   '/:id',
-  [ValidateSchema(updateUserSchema)],
+  [CheckAuth, checkRole([Rols.adminUpdateUser, Rols.updateUser]), ValidateSchema(updateUserSchema)],
   asyncHandler(UserController.editUser),
 );
 
 router.delete(
   '/:id',
-  [CheckAuth],
+  [CheckAuth, checkRole([Rols.adminDeleteUser])],
   asyncHandler(UserController.deleteUser),
 );
 export default router;

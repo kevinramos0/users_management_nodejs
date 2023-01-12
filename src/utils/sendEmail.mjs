@@ -49,7 +49,9 @@ const sendEmailVerifyUser = async (email, token) => {
     </div>`,
     });
   } catch (error) {
-    throw new ErrorException(StatusCode.InternalServerError);
+    console.log({ error });
+
+    throw new ErrorException(StatusCode.InternalServerError, error);
   }
 };
 
@@ -103,7 +105,7 @@ const sendEmailResetPassword = async (email, token) => {
     </div>`,
     });
   } catch (error) {
-    throw new ErrorException(StatusCode.InternalServerError);
+    throw new ErrorException(StatusCode.InternalServerError, error);
   }
 };
 

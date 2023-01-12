@@ -1,24 +1,27 @@
 import ErrorException from '../configs/handlers/ErrorExceptions.mjs';
 import StatusCode from '../configs/handlers/StatusCode.mjs';
 import { UserService, ProfileService } from '../services/index.mjs';
+import Rols from '../utils/enumRoles.mjs';
 
-const checkProfile = (roles) => async (req, res, next) => {
+const checkRole = (roles) => async (req, res, next) => {
   try {
     const user = await UserService.findById(req.user.id);
     const profile = await ProfileService.findById(user.Profile.id);
 
+    if (!profile.Rols) throw new ErrorException(StatusCode.Forbidden, 'Forbidden');
     // obtener array de roles del usuario
-    const namesRoles = profile.map((rol) => rol.name);
+    const namesRoles = profile.Rols.map((rol) => rol.name);
 
-    if (namesRoles.includes('Admin')) {
-      next();
-    }
-    // comparar ambos array si no encuentra concidencia retornar error
+    // comparar array de roles del perfil con roles que tienen acceso
     const filtro = [...namesRoles.filter((p) => roles.includes(p))];
-    if (filtro.length === 0) throw new ErrorException(StatusCode.Forbidden, 'Forbidden');
+
+    // no contiene ningun rol valido y no  es Admin
+    if (filtro.length === 0 && !namesRoles.includes(Rols.admin)) {
+      throw new ErrorException(StatusCode.Forbidden, 'Forbidden');
+    }
     next();
   } catch (error) {
     next(error);
   }
 };
-export default checkProfile;
+export default checkRole;

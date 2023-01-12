@@ -105,22 +105,22 @@ export default class authController {
   };
 
   static refreshToken = async (req, res) => {
-    const { tokenRefresh } = req.body;
-    if (!tokenRefresh) {
+    const { refreshToken } = req.params;
+    if (!refreshToken) {
       throw new ErrorException(StatusCode.Bad_Request, 'tokenRefresh is required');
     }
 
-    const refreshToken = await RefreshToken.findOne({ where: { refresh_token: tokenRefresh } });
-    if (!refreshToken) throw new ErrorException(StatusCode.Bad_Request, 'token invalid');
+    const getToken = await RefreshToken.findOne({ where: { refresh_token: refreshToken } });
+    if (!getToken) throw new ErrorException(StatusCode.Bad_Request, 'token invalid');
 
-    const dateToken = moment(refreshToken.date_valid).valueOf();
+    const dateToken = moment(getToken.date_valid).valueOf();
     const DateNow = moment().tz('America/El_Salvador').valueOf();
     if (dateToken < DateNow) {
       throw new ErrorException(StatusCode.Bad_Request, 'Token expired, please sign in again');
     }
 
     // obtener el usuario dueño de este token
-    const user = await User.findByPk(refreshToken.id_user);
+    const user = await User.findByPk(getToken.id_user);
     if (!user) throw new ErrorException(StatusCode.NotFound, 'User not found');
 
     const token = await Auth.createToken(user.id);

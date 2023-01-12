@@ -1,4 +1,5 @@
 // import DB from '../configs/DB/DB.mjs';
+import { Sequelize, Op } from 'sequelize';
 import ErrorException from '../configs/handlers/ErrorExceptions.mjs';
 import StatusCode from '../configs/handlers/StatusCode.mjs';
 import isNumber from '../utils/isNumber.mjs';
@@ -10,6 +11,33 @@ export default class RolService {
     const rol = await Rol.findByPk(id);
     if (!rol) throw new ErrorException(StatusCode.NotFound, 'Not found rol');
     return rol;
+  };
+
+  static findByName = async (name) => {
+    const rol = await Rol.findOne({
+      where: Sequelize.where(
+        Sequelize.fn('lower', Sequelize.col('name')),
+        Sequelize.fn('lower', name),
+      ),
+    });
+
+    return rol;
+  };
+
+  static findNameInOthersRols = async (id, name) => {
+    const rol = await Rol.findOne({
+      where: {
+        [Op.and]: [
+          { [Op.not]: [{ id }] },
+          Sequelize.where(
+            Sequelize.fn('lower', Sequelize.col('name')),
+            Sequelize.fn('lower', name),
+          ),
+        ],
+      },
+    });
+
+    if (rol) throw new ErrorException(StatusCode.Bad_Request, `Rol ${name} already exists`);
   };
 
   static checkRols = async (rols) => {

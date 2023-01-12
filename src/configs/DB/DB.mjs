@@ -1,5 +1,5 @@
 import { Sequelize } from 'sequelize';
-import dbConfig from '../../configs/db.mjs';
+import dbConfig from '../db.mjs';
 
 export default class db {
   static connection(connection = null) {

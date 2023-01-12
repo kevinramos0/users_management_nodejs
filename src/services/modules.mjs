@@ -1,4 +1,5 @@
 // import DB from '../configs/DB/DB.mjs';
+import { Sequelize, Op } from 'sequelize';
 import ErrorException from '../configs/handlers/ErrorExceptions.mjs';
 import StatusCode from '../configs/handlers/StatusCode.mjs';
 import isNumber from '../utils/isNumber.mjs';
@@ -12,6 +13,49 @@ export default class ModuleService {
     return module;
   };
 
+  static findByName = async (name) => {
+    const module = await Modules.findOne({
+      where: Sequelize.where(
+        Sequelize.fn('lower', Sequelize.col('name')),
+        Sequelize.fn('lower', name),
+      ),
+    });
+
+    return module;
+  };
+
+  static findByField = async (field, param) => {
+    const module = await Modules.findOne({
+      where: Sequelize.where(
+        Sequelize.fn('lower', Sequelize.col(`${field}`)),
+        Sequelize.fn('lower', param),
+      ),
+    });
+
+    if (module) { throw new ErrorException(StatusCode.Bad_Request, `Module already exists with param ${param}`); }
+  };
+
+  /**
+ * @param {*} id id
+ * @param {*} field nombre de la columna (name, name_ruta, etc)
+ * @param {*} param valor de la columna
+ */
+  static findInOtherModules = async (id, field, param) => {
+    const module = await Modules.findOne({
+      where: {
+        [Op.and]: [
+          { [Op.not]: [{ id }] },
+          Sequelize.where(
+            Sequelize.fn('lower', Sequelize.col(`${field}`)),
+            Sequelize.fn('lower', param),
+          ),
+        ],
+      },
+    });
+
+    if (module) throw new ErrorException(StatusCode.Bad_Request, `Module ${param} already exists`);
+  };
+
   static checkModules = async (modules) => {
     // eslint-disable-next-line no-plusplus
     for (let index = 0; index < modules.length; index++) {
@@ -23,11 +67,13 @@ export default class ModuleService {
   static getModulesProfile = async (profile) => {
     const modules = await Modules.findAll({
       attributes: ['id', 'name'],
-      include: [{
-        model: Profile,
-        where: { id: profile },
-        attributes: [],
-      }],
+      include: [
+        {
+          model: Profile,
+          where: { id: profile },
+          attributes: [],
+        },
+      ],
     });
 
     return modules;

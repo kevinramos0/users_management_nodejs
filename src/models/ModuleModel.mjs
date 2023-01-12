@@ -55,6 +55,8 @@ class Modules extends psql.Model {
       icon: this.icon,
       isActive: this.is_active,
       isPublic: this.is_public,
+      createdAt: this.created_at,
+      updatedAt: this.updated_at,
     };
   }
 }

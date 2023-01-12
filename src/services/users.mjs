@@ -1,6 +1,7 @@
+import { Sequelize, Op } from 'sequelize';
 import moment from 'moment-timezone';
-import { encriptar } from '../utils/EncryptPassword.mjs';
 
+import { encriptar } from '../utils/EncryptPassword.mjs';
 // import DB from '../configs/DB/DB.mjs';
 import ErrorException from '../configs/handlers/ErrorExceptions.mjs';
 import StatusCode from '../configs/handlers/StatusCode.mjs';
@@ -16,9 +17,30 @@ export default class UserService {
   };
 
   static findByEmail = async (email) => {
-    const user = await User.findOne({ where: { email } });
+    const user = await User.findOne({
+      where: Sequelize.where(
+        Sequelize.fn('lower', Sequelize.col('email')),
+        Sequelize.fn('lower', email),
+      ),
+    });
     // if (!user) throw new ErrorException(StatusCode.NotFound, `user ${name} not found`);
     return user;
+  };
+
+  static findEmailInOthersUsers = async (id, email) => {
+    const user = await User.findOne({
+      where: {
+        [Op.and]: [
+          { [Op.not]: [{ id }] },
+          Sequelize.where(
+            Sequelize.fn('lower', Sequelize.col('email')),
+            Sequelize.fn('lower', email),
+          ),
+        ],
+      },
+    });
+
+    if (user) throw new ErrorException(StatusCode.Bad_Request, `email ${email} already exists`);
   };
 
   static updatePassword = async (id, password) => {

@@ -125,13 +125,7 @@ export default class ProfileController {
 
     // si se cambia el nombre buscar que no exista otro perfil con ese nombre
     if (name) {
-      const nameExists = await Profile.findOne({
-        where: { name, [Op.not]: [{ id }] },
-      });
-
-      if (nameExists) {
-        throw new ErrorException(StatusCode.Bad_Request, `Profile ${name} already exists`);
-      }
+      await ProfileService.findNameInOthersProfiles(id, name);
     }
 
     const connection = DB.connection();
@@ -182,7 +176,7 @@ export default class ProfileController {
       where: { id },
     });
 
-    res.status(StatusCode.OK).json({
+    return res.status(StatusCode.OK).json({
       message: 'Profile deleted successfully',
     });
   };

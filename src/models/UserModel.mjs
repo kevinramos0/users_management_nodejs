@@ -54,7 +54,7 @@ class User extends psql.Model {
       profile: this.Profile,
       createdAt: this.created_at,
       updatedAt: this.updated_at,
-      deletedAt: this.deleted_at,
+      // deletedAt: this.deleted_at,
     };
   }
 }

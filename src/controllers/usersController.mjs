@@ -128,15 +128,7 @@ export default class UserController {
 
       if (email) {
         // buscar si cambio de email, que este no exista para otro usuario
-        const emailExist = await User.findOne({
-          where: {
-            email,
-            [Op.not]: [{ id }],
-          },
-        });
-        if (emailExist) {
-          throw new ErrorException(StatusCode.Bad_Request, `email ${email} already exists`);
-        }
+        await UserService.findEmailInOthersUsers(id, email);
       }
 
       if (profile) await ProfileService.findById(profile);

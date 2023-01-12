@@ -33,7 +33,7 @@ class Rol extends psql.Model {
       isActive: this.is_active,
       createdAt: this.created_at,
       updatedAt: this.updated_at,
-      deletedAt: this.deleted_at,
+      // deletedAt: this.deleted_at,
     };
   }
 }

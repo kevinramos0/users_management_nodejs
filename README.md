@@ -1,8 +1,7 @@
 # users_management_nodejs
 
 Step 1:
-copy .env.example
-rename to .env
+copy .env.example and rename to .env
 
 Step 2:
 npm install

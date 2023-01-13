@@ -2,7 +2,7 @@
   post:
     tags:
       - Authentication
-    description: EndPoint para inicio de sesion de usuarios activos
+    description: Login Endpoint
     operationId: Login
     requestBody:
       content:
@@ -16,7 +16,17 @@
         content:
             application/json:
               schema:
-                $ref: "#/components/schemas/User" 
+                allOf:
+                  - type: object
+                    properties:
+                      user:
+                        $ref: "#/components/schemas/User"
+                  - type: object
+                    properties:
+                      token:
+                        type: string
+                      refreshToken:
+                        type: string   
       400:
         description: Bad Request
         content:
@@ -49,61 +59,7 @@
               $ref: "#/components/schemas/Error"
 
     x-codegen-request-body-name: body
-/api/auth/refresh-token/:
-  post:
-    tags:
-      - Authentication
-    description: EndPoint para renovar token de acceso
-    operationId: RefreshToken
-    requestBody:
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              tokenRefresh:
-                type: string
-      required: true
-    responses:
-      200:
-        description: OK
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/User"
-      400:
-        description: Bad Request
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Error"
-      401:
-        description: Acceso no Autorizado
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Error"
-      404:
-        description: Not Found
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Error"
-      405:
-        description: Not Allowed
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Error"
-      500:
-        description: Internal Server Error
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Error"
-
-    x-codegen-request-body-name: body
-/api/auth/logout/:
+/api/auth/logout:
   post:
     tags:
       - Authentication
@@ -143,3 +99,218 @@
           application/json:
             schema:
               $ref: "#/components/schemas/Error"
+
+    x-codegen-request-body-name: body
+/api/auth/reset/password:
+  post:
+    tags:
+      - Authentication
+    description: Reset password
+    operationId: recovery password
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+      required: true
+    responses:
+      200:
+        description: OK
+        content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                description: please check your email for change your password
+      400:
+        description: Bad Request
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+      404:
+        description: Not Found
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+      405:
+        description: Not Allowed
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+      500:
+        description: Internal Server Error
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+
+    x-codegen-request-body-name: body
+/api/auth/create/password/{token}:
+  post:
+    tags: 
+      - Authentication
+    description: Create a new password
+    operationId: change password
+    parameters:
+      - in: path
+        name: token
+        schema:
+          type: string
+        required: true
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              password:
+                type: string
+      required: true
+    responses:
+      200:
+        description: OK
+        content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                description: password has been changed successfully
+      400:
+        description: Bad Request
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+      404:
+        description: Not Found
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+      405:
+        description: Not Allowed
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+      500:
+        description: Internal Server Error
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+
+    x-codegen-request-body-name: body
+/api/auth/verify/account/{token}:
+  post:
+    tags: 
+      - Authentication
+    description: Verify account
+    operationId: verify account
+    parameters:
+      - in: path
+        name: token
+        schema:
+          type: string
+        required: true
+    responses:
+      200:
+        description: OK
+        content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                description: User verified successfully
+      400:
+        description: Bad Request
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+      404:
+        description: Not Found
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+      405:
+        description: Not Allowed
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+      500:
+        description: Internal Server Error
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+
+    x-codegen-request-body-name: body
+
+/api/auth/refresh/{refreshToken}:
+  post:
+    tags:
+      - Authentication
+    description: EndPoint to refresk token
+    operationId: RefreshToken
+    parameters:
+      - in: path
+        name: refreshToken
+        schema:
+          type: string
+        required: true
+    responses:
+      200:
+        description: OK
+        schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                description: token
+      400:
+        description: Bad Request
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+      401:
+        description: Acceso no Autorizado
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+      404:
+        description: Not Found
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+      405:
+        description: Not Allowed
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+      500:
+        description: Internal Server Error
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+
+    x-codegen-request-body-name: body

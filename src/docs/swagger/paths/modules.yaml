@@ -1,9 +1,9 @@
-/api/users:
+/api/modules:
   get:
     tags:
-      - Users
-    description: Get all users
-    operationId: GetUsers
+      - Modules
+    description: Get all modules
+    operationId: GetModules
     parameters:
       - in: query
         name: pagination
@@ -24,15 +24,15 @@
           default: 1
         description: number page
       - in: query
-        name: email
+        name: name
         schema:
           type: string
-        description: search for email
+        description: filter for name
       - in: query
         name: active
         schema:
           type: boolean
-        description: search for status users
+        description: filter for state
     responses:
       200:
         description: OK
@@ -42,7 +42,7 @@
                 type: array
                 items:
                   allOf:
-                    - $ref: "#/components/schemas/Users"
+                    - $ref: "#/components/schemas/Modules"
                     - $ref: "#/components/schemas/Pagination" 
       400:
         description: Bad Request
@@ -78,25 +78,14 @@
     x-codegen-request-body-name: body
   post:
     tags:
-      - Users
-    description: Create User
-    operationId: PostUser
+      - Modules
+    description: Create a new Module
+    operationId: PostModule
     requestBody:
       content:
         application/json:
           schema:
-            type: object
-            properties:
-              email:
-                type: string
-                minLength: 2
-              password:
-                type: string
-                minLength: 2
-              profile:
-                type: integer
-                format: int32
-                nullable: true
+            $ref: "#/components/schemas/CreateModule"
       required: true
     responses:
       201:
@@ -104,7 +93,7 @@
         content:
             application/json:
               schema:
-                $ref: "#/components/schemas/User" 
+                $ref: "#/components/schemas/Module" 
       400:
         description: Bad Request
         content:
@@ -137,19 +126,19 @@
               $ref: "#/components/schemas/Error"
 
     x-codegen-request-body-name: body
-/api/users/{id}:
+/api/modules/{id}:
   get:
     tags:
-      - Users
-    description: Get one user
-    operationId: GetOneUser
+      - Modules
+    description: Get one Module
+    operationId: Get Module
     parameters:
       - in: path
         name: id
         schema:
           type: integer
           format: int32
-        description: Id User
+        description: Id Module
         required: true
     responses:
       200:
@@ -157,7 +146,7 @@
         content:
             application/json:
               schema:
-                $ref: "#/components/schemas/User" 
+                $ref: "#/components/schemas/Module" 
       400:
         description: Bad Request
         content:
@@ -192,38 +181,27 @@
     x-codegen-request-body-name: body
   put:
     tags:
-      - Users
-    description: Update User
-    operationId: UpdateUser
+      - Modules
+    description: Update Module
+    operationId: updateModule
     parameters:
       - in: path
         name: id
         schema:
           type: integer
           format: int32
-        description: Id User
+        description: Id Profile
         required: true
     requestBody:
       content:
         application/json:
-          schema:
-            type: object
-            properties:
-              email:
-                type: string
-                minLength: 2
-              isActive:
-                type: boolean
-              isVerified:
-                type: boolean
-              profile:
-                type: integer
-                format: int32
-              # roles:
-              #   type: array
-              #   items:
-              #     type: integer
-              #     format: int32
+              schema:
+                allOf:
+                  - $ref: "#/components/schemas/CreateModule"
+                  - type: object
+                    properties:
+                      isActive:
+                        type: boolean
       required: true
     responses:
       200:
@@ -231,7 +209,7 @@
         content:
             application/json:
               schema:
-                $ref: "#/components/schemas/User" 
+                $ref: "#/components/schemas/Module" 
       400:
         description: Bad Request
         content:
@@ -266,20 +244,20 @@
     x-codegen-request-body-name: body
   delete:
     tags:
-      - Users
-    description:  Delete user
-    operationId: DeleteUser
+      - Modules
+    description: Delete Module
+    operationId: deleteModule
     parameters:
       - in: path
         name: id
         schema:
           type: integer
           format: int32
-        description: Id User
+        description: Id Module
         required: true
     responses:
       200:
-        description: User deleted successfully
+        description: Module deleted successfully
         content:
             application/json:
               schema:
@@ -287,7 +265,7 @@
                 properties:
                   message:
                     type: string
-                description: User deleted successfully
+                description: Module deleted successfully
       400:
         description: Bad Request
         content:
@@ -320,65 +298,3 @@
               $ref: "#/components/schemas/Error"
 
     x-codegen-request-body-name: body
-/api/users/change/password:
-  post:
-    tags:
-      - Users
-    description: Change password
-    operationId: ChangePasswordUser
-    requestBody:
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              oldPassword:
-                type: string
-              newPassword:
-                type: string
-                minLength: 7
-      required: true
-    responses:
-      200:
-        description: Password has been changed successfully
-        content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                description: Password has been changed successfully
-      400:
-        description: Bad Request
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Error"
-      401:
-        description: Unauthenticated
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Error"
-      404:
-        description: Not Found
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Error"
-      405:
-        description: Not Allowed
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Error"
-      500:
-        description: Internal Server Error
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Error"
-
-    x-codegen-request-body-name: body
-

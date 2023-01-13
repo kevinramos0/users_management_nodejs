@@ -174,7 +174,7 @@ export default class UserController {
     const { id } = req.user;
     const { oldPassword, newPassword } = req.body;
 
-    const user = await UserService.findById(id);
+    const user = await User.findByPk(id);
 
     // Check old password
     await comparar(oldPassword, user.password, "Current password doesn't match");

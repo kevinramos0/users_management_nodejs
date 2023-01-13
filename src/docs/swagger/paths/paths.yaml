@@ -1,2 +1,5 @@
 $include: "auth.yaml"
 $include: "users.yaml"
+$include: "profiles.yaml"
+$include: "rols.yaml"
+$include: "modules.yaml"

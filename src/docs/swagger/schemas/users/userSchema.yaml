@@ -1,0 +1,21 @@
+type: object
+properties:
+  id:
+    type: integer
+  email:
+    type: string
+  isActive:
+    type: boolean
+  isVerified: 
+    type: boolean 
+  profile:
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+  createdAt:
+    type: string
+  updatedAt:
+    type: string

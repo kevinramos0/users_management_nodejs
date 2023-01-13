@@ -1,0 +1,12 @@
+type: object
+properties:
+  name:
+    type: string
+  nameRoute:
+    type: string
+  description:
+    type: string
+  icon:
+    type: string
+  isPublic:
+    type: boolean

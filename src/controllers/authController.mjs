@@ -54,14 +54,14 @@ export default class authController {
     await comparar(password, user.password);
 
     /** crear Token para el usuario */
-    const tokenJwt = await Auth.createToken(user.id);
+    const token = await Auth.createToken(user.id);
     /** crear refresh_token */
-    const tokenRefresh = await Auth.refresh_token(user.id);
+    const refreshToken = await Auth.refresh_token(user.id);
 
     return res.status(StatusCode.OK).json({
       user,
-      token: tokenJwt,
-      tokenRefresh,
+      token,
+      refreshToken,
     });
   };
 

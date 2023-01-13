@@ -1,0 +1,19 @@
+type: object
+properties:
+  profiles:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: integer
+        email:
+          type: string
+        description:
+          type: string
+        isActive: 
+          type: boolean 
+        createdAt:
+          type: string
+        updatedAt:
+          type: string

@@ -1,0 +1,16 @@
+type: object
+properties:
+  name:
+    type: string
+  description:
+    type: string
+  rols:
+    type: array
+    items:
+      type: integer
+      format: int32
+  modules:
+    type: array
+    items:
+      type: integer
+      format: int32

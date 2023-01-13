@@ -1,6 +1,26 @@
 Login:
   $include: "loginSchema.yaml"
 User:
-  $include: "userSchema.yaml"
+  $include: "./users/userSchema.yaml"
+Users:
+  $include: "./users/usersSchema.yaml"
+Profile:
+  $include: "./profiles/profileSchema.yaml"
+Profiles:
+  $include: "./profiles/profilesSchema.yaml"
+CreateProfile:
+  $include: "./profiles/createProfileSchema.yaml"
+Rol:
+  $include: "./rols/rolSchema.yaml"
+Rols:
+  $include: "./rols/rolsSchema.yaml"
+Module:
+  $include: "./modules/moduleSchema.yaml"
+Modules:
+  $include: "./modules/modulesShema.yaml"
+CreateModule:
+  $include: "./modules/createModuleSchema.yaml"
 Error:
   $include: "errorSchema.yaml"
+Pagination:
+  $include: "paginationSchema.yaml"

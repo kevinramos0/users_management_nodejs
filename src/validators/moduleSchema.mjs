@@ -9,12 +9,12 @@ const createModuleSchema = {
         minLength: 'Field name must contain a minimum of 4 characters',
       },
     },
-    nameRuta: {
+    nameRoute: {
       type: 'string',
       minLength: 4,
       errorMessage: {
-        type: 'Field nameRuta should alphanumeric',
-        minLength: 'Field nameRuta must contain a minimum of 4 characters',
+        type: 'Field nameRoute should alphanumeric',
+        minLength: 'Field nameRoute must contain a minimum of 4 characters',
       },
     },
     description: {
@@ -38,11 +38,11 @@ const createModuleSchema = {
       },
     },
   },
-  required: ['name', 'nameRuta', 'icon', 'isPublic'],
+  required: ['name', 'nameRoute', 'icon', 'isPublic'],
   errorMessage: {
     required: {
       name: 'Field name is required',
-      nameRuta: 'Field nameRuta is required',
+      nameRoute: 'Field nameRoute is required',
       icon: 'Field icon is required',
       isPublic: 'Field isPublic is required',
     },
@@ -60,12 +60,12 @@ const updateModuleSchema = {
         minLength: 'Field name must contain a minimum of 4 characters',
       },
     },
-    nameRuta: {
+    nameRoute: {
       type: 'string',
       minLength: 4,
       errorMessage: {
-        type: 'Field nameRuta should alphanumeric',
-        minLength: 'Field nameRuta must contain a minimum of 4 characters',
+        type: 'Field nameRoute should alphanumeric',
+        minLength: 'Field nameRoute must contain a minimum of 4 characters',
       },
     },
     description: {

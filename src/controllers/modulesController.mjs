@@ -59,16 +59,16 @@ export default class ModulesController {
 
   static create = async (req, res) => {
     const {
-      name, nameRuta, icon, description, isPublic,
+      name, nameRoute, icon, description, isPublic,
     } = req.body;
 
     // buscar si existe otro modulo con ese nombre, ruta
     await ModuleService.findByField('name', name);
-    await ModuleService.findByField('name_ruta', nameRuta);
+    await ModuleService.findByField('name_ruta', nameRoute);
 
     const module = await Modules.create({
       name,
-      name_ruta: nameRuta,
+      name_ruta: nameRoute,
       icon,
       description,
       is_public: isPublic,
@@ -82,7 +82,7 @@ export default class ModulesController {
   static update = async (req, res) => {
     const { id } = req.params;
     const {
-      name, nameRuta, icon, description, isActive, isPublic,
+      name, nameRoute, icon, description, isActive, isPublic,
     } = req.body;
 
     // verifcar que exista el modulo con ese nombre id
@@ -91,12 +91,12 @@ export default class ModulesController {
     // check que no exista otro modulo con el nuevo nombre
     if (name) await ModuleService.findInOtherModules(id, 'name', name);
 
-    if (nameRuta) await ModuleService.findInOtherModules(id, 'name_ruta', nameRuta);
+    if (nameRoute) await ModuleService.findInOtherModules(id, 'name_ruta', nameRoute);
 
     await Modules.update(
       {
         name,
-        name_ruta: nameRuta,
+        name_ruta: nameRoute,
         icon,
         description,
         is_active: isActive,

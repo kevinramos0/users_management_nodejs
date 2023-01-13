@@ -44,6 +44,7 @@
     "webpack-dev-middleware": "^5.3.3",
     "webpack-hot-middleware": "^2.25.2",
     "webpack-node-externals": "^3.0.0",
+    "yamlinc": "^0.1.10",
     "yamljs": "^0.3.0"
   },
   "devDependencies": {

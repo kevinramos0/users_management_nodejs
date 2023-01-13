@@ -1,0 +1,32 @@
+type: object
+properties:
+  id:
+    type: integer
+  name:
+    type: string
+  description:
+    type: string
+  isActive:
+    type: boolean 
+  createdAt:
+    type: string
+  updatedAt:
+    type: string
+  rols:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+  modules:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string

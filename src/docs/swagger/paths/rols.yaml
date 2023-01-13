@@ -1,9 +1,9 @@
-/api/users:
+/api/rols:
   get:
     tags:
-      - Users
-    description: Get all users
-    operationId: GetUsers
+      - Rols
+    description: Get all rols
+    operationId: GetRols
     parameters:
       - in: query
         name: pagination
@@ -24,15 +24,15 @@
           default: 1
         description: number page
       - in: query
-        name: email
+        name: name
         schema:
           type: string
-        description: search for email
+        description: filter for name
       - in: query
         name: active
         schema:
           type: boolean
-        description: search for status users
+        description: filter for state
     responses:
       200:
         description: OK
@@ -42,7 +42,7 @@
                 type: array
                 items:
                   allOf:
-                    - $ref: "#/components/schemas/Users"
+                    - $ref: "#/components/schemas/Rols"
                     - $ref: "#/components/schemas/Pagination" 
       400:
         description: Bad Request
@@ -78,24 +78,19 @@
     x-codegen-request-body-name: body
   post:
     tags:
-      - Users
-    description: Create User
-    operationId: PostUser
+      - Rols
+    description: Create a new Rol
+    operationId: PostRol
     requestBody:
       content:
         application/json:
           schema:
             type: object
             properties:
-              email:
+              name:
                 type: string
-                minLength: 2
-              password:
+              description:
                 type: string
-                minLength: 2
-              profile:
-                type: integer
-                format: int32
                 nullable: true
       required: true
     responses:
@@ -104,7 +99,7 @@
         content:
             application/json:
               schema:
-                $ref: "#/components/schemas/User" 
+                $ref: "#/components/schemas/Rol" 
       400:
         description: Bad Request
         content:
@@ -137,19 +132,19 @@
               $ref: "#/components/schemas/Error"
 
     x-codegen-request-body-name: body
-/api/users/{id}:
+/api/rols/{id}:
   get:
     tags:
-      - Users
-    description: Get one user
-    operationId: GetOneUser
+      - Rols
+    description: Get one Rol
+    operationId: Get Rol
     parameters:
       - in: path
         name: id
         schema:
           type: integer
           format: int32
-        description: Id User
+        description: Id Rol
         required: true
     responses:
       200:
@@ -157,7 +152,7 @@
         content:
             application/json:
               schema:
-                $ref: "#/components/schemas/User" 
+                $ref: "#/components/schemas/Rol" 
       400:
         description: Bad Request
         content:
@@ -192,9 +187,9 @@
     x-codegen-request-body-name: body
   put:
     tags:
-      - Users
-    description: Update User
-    operationId: UpdateUser
+      - Rols
+    description: Update Rol
+    operationId: updateRol
     parameters:
       - in: path
         name: id
@@ -209,21 +204,13 @@
           schema:
             type: object
             properties:
-              email:
+              name:
                 type: string
-                minLength: 2
+                minlength: 4
+              description:
+                type: string
               isActive:
                 type: boolean
-              isVerified:
-                type: boolean
-              profile:
-                type: integer
-                format: int32
-              # roles:
-              #   type: array
-              #   items:
-              #     type: integer
-              #     format: int32
       required: true
     responses:
       200:
@@ -231,7 +218,7 @@
         content:
             application/json:
               schema:
-                $ref: "#/components/schemas/User" 
+                $ref: "#/components/schemas/Rol" 
       400:
         description: Bad Request
         content:
@@ -266,20 +253,20 @@
     x-codegen-request-body-name: body
   delete:
     tags:
-      - Users
-    description:  Delete user
-    operationId: DeleteUser
+      - Rols
+    description: Delete Rol
+    operationId: deleteRol
     parameters:
       - in: path
         name: id
         schema:
           type: integer
           format: int32
-        description: Id User
+        description: Id Rol
         required: true
     responses:
       200:
-        description: User deleted successfully
+        description: Rol deleted successfully
         content:
             application/json:
               schema:
@@ -287,68 +274,7 @@
                 properties:
                   message:
                     type: string
-                description: User deleted successfully
-      400:
-        description: Bad Request
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Error"
-      401:
-        description: Unauthenticated
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Error"
-      404:
-        description: Not Found
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Error"
-      405:
-        description: Not Allowed
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Error"
-      500:
-        description: Internal Server Error
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Error"
-
-    x-codegen-request-body-name: body
-/api/users/change/password:
-  post:
-    tags:
-      - Users
-    description: Change password
-    operationId: ChangePasswordUser
-    requestBody:
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              oldPassword:
-                type: string
-              newPassword:
-                type: string
-                minLength: 7
-      required: true
-    responses:
-      200:
-        description: Password has been changed successfully
-        content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                description: Password has been changed successfully
+                description: Rol deleted successfully
       400:
         description: Bad Request
         content:
@@ -382,3 +308,7 @@
 
     x-codegen-request-body-name: body
 
+
+
+
+    

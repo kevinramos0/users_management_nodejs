@@ -8,9 +8,7 @@ openapi: 3.0.0
 info:
   title: Management Users API REST
   version: 1.0.0
-  description: >-
-    API para el manejo de usuarios desarrollada con Express, PostgresSQL, JWT y
-    Swagger
+  description: 'User management API developed with Express, PostgresSQL, JWT and Swagger'
   license:
     name: MIT
     url: 'https://spdx.org/licenses/MIT.html'

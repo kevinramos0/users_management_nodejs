@@ -3,13 +3,13 @@ import './env.mjs';
 const config = {
   connections: {
     postgres: {
-      motor: process.env.DB_DIALECT || 'postgres', // mysql, mariadb, sqlite, postgres
+      motor: process.env.DB_DIALECT, // mysql, mariadb, sqlite, postgres
       options: {
-        db_host: process.env.DB_HOST || 'localhost',
-        db_port: process.env.DB_PORT || 5432,
-        db_name: process.env.DB_DATABASE || 'users_management',
-        db_username: process.env.DB_USERNAME || 'admin',
-        db_password: process.env.DB_PASSWORD || 'admin',
+        db_host: process.env.DB_HOST,
+        db_port: +process.env.DB_PORT,
+        db_name: process.env.DB_DATABASE,
+        db_username: process.env.DB_USERNAME,
+        db_password: process.env.DB_PASSWORD,
       },
     },
   },

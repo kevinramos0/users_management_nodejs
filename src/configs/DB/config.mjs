@@ -1,12 +1,12 @@
-import '../../configs/env.mjs';
+import '../env.mjs';
 
 const development = {
-  database: process.env.DB_DATABASE || 'users_management',
-  username: process.env.DB_USERNAME || 'admin',
-  password: process.env.DB_PASSWORD || 'admin',
-  host: process.env.DB_HOST || 'localhost',
-  port: process.env.DB_PORT || 5432,
-  dialect: process.env.DB_DIALECT || 'postgres',
+  database: process.env.DB_DATABASE,
+  username: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  dialect: process.env.DB_DIALECT,
 };
 
 export default development;

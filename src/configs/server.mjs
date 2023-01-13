@@ -15,7 +15,6 @@ import ErrorException from './handlers/ErrorExceptions.mjs';
 import StatusCode from './handlers/StatusCode.mjs';
 import ErrorHandler from './handlers/ErrorHandler.mjs';
 import corsConfig from './cors.mjs';
-// import DB from '../app/DB/DB.mjs';
 
 class Server {
   constructor() {
@@ -75,7 +74,7 @@ class Server {
 
   listen() {
     this.app.listen(this.port, () => {
-      console.log('Servidor corriendo en puerto', this.port);
+      console.log(`Server listening in port ${this.port}`);
     });
   }
 }

@@ -715,7 +715,7 @@ paths:
           name: limit
           schema:
             type: integer
-            default: 10profiles
+            default: 10
           description: amount per page
         - in: query
           name: offset

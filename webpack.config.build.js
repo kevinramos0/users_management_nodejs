@@ -1,10 +1,10 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
-const Webpack = require('webpack');
-// eslint-disable-next-line no-unused-vars
-// const HtmlWebPackPlugin = require('html-webpack-plugin');
 const DotEnv = require('dotenv-webpack');
-const ESLintPlugin = require('eslint-webpack-plugin');
+const dotenv = require('dotenv');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
+dotenv.config();
 
 module.exports = {
   entry: {
@@ -15,7 +15,7 @@ module.exports = {
     publicPath: '/',
     filename: '[name].js',
   },
-  mode: 'development',
+  mode: 'production',
   target: 'node',
   node: {
     __dirname: false,
@@ -44,15 +44,7 @@ module.exports = {
     ],
   },
   plugins: [
-    // new HtmlWebPackPlugin({
-    //   template: './public/index.html',
-    //   filename: './public/index.html',
-    //   excludeChunks: ['server'],
-    // }),
-    new Webpack.HotModuleReplacementPlugin(),
     new DotEnv(),
-    new ESLintPlugin(),
-    // new Webpack.NoEmitOnErrorsPlugin(),
-
+    new CleanWebpackPlugin(),
   ],
 };

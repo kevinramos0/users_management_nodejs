@@ -14,7 +14,7 @@ router.post('/reset/password', asyncHandler(authController.restorePassword));
 router.post(
   '/create/password/:token',
   [ValidateSchema(resetPasswordSchema)],
-  asyncHandler(authController.saveNewPassword),
+  asyncHandler(authController.saveNewPassword)
 );
 router.post('/verify/account/:token', asyncHandler(authController.verifyUser));
 router.post('/refresh/:refreshToken', [CheckAuth], asyncHandler(authController.refreshToken));

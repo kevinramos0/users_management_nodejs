@@ -19,30 +19,30 @@ router.post(
     checkRole(Rols.adminUpdateUser, Rols.updateUser),
     ValidateSchema(changePasswordSchema),
   ],
-  asyncHandler(UserController.changePassword),
+  asyncHandler(UserController.changePassword)
 );
 
 router.get(
   '/:id',
   [CheckAuth, checkRole([Rols.adminGetUser, Rols.getUser])],
-  asyncHandler(UserController.findOne),
+  asyncHandler(UserController.findOne)
 );
 
 router.post(
   '/',
   [CheckAuth, checkRole([Rols.adminCreateUser, Rols.createUser]), ValidateSchema(createUserSchema)],
-  asyncHandler(UserController.createUser),
+  asyncHandler(UserController.createUser)
 );
 
 router.put(
   '/:id',
   [CheckAuth, checkRole([Rols.adminUpdateUser, Rols.updateUser]), ValidateSchema(updateUserSchema)],
-  asyncHandler(UserController.editUser),
+  asyncHandler(UserController.editUser)
 );
 
 router.delete(
   '/:id',
   [CheckAuth, checkRole([Rols.adminDeleteUser])],
-  asyncHandler(UserController.deleteUser),
+  asyncHandler(UserController.deleteUser)
 );
 export default router;

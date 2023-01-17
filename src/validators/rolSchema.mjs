@@ -15,7 +15,6 @@ const createRolSchema = {
         type: 'Field description should alphanumeric',
       },
     },
-
   },
   required: ['name'],
   errorMessage: {
@@ -48,7 +47,6 @@ const updateRolSchema = {
         type: 'Field isActive should boolean',
       },
     },
-
   },
 };
 

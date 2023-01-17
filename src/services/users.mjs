@@ -20,7 +20,7 @@ export default class UserService {
     const user = await User.findOne({
       where: Sequelize.where(
         Sequelize.fn('lower', Sequelize.col('email')),
-        Sequelize.fn('lower', email),
+        Sequelize.fn('lower', email)
       ),
     });
     // if (!user) throw new ErrorException(StatusCode.NotFound, `user ${name} not found`);
@@ -34,7 +34,7 @@ export default class UserService {
           { [Op.not]: [{ id }] },
           Sequelize.where(
             Sequelize.fn('lower', Sequelize.col('email')),
-            Sequelize.fn('lower', email),
+            Sequelize.fn('lower', email)
           ),
         ],
       },
@@ -57,7 +57,7 @@ export default class UserService {
         where: {
           id,
         },
-      },
+      }
     );
 
     return {

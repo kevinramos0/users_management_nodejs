@@ -94,7 +94,6 @@ const updateModuleSchema = {
         type: 'Field isActive should boolean',
       },
     },
-
   },
 };
 

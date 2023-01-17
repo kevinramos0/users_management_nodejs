@@ -12,9 +12,7 @@ import { UserService, ProfileService } from '../services/index.mjs';
 
 export default class UserController {
   static findAll = async (req, res) => {
-    const {
-      limit = 10, offset = 1, pagination = 'true', email, active,
-    } = req.query;
+    const { limit = 10, offset = 1, pagination = 'true', email, active } = req.query;
     const filter = {};
     const options = {};
 
@@ -93,7 +91,7 @@ export default class UserController {
           id_profile: profile,
           create_at: moment().tz('America/El_Salvador').format(),
         },
-        { transaction: t },
+        { transaction: t }
       );
 
       await t.commit();
@@ -108,9 +106,7 @@ export default class UserController {
   static editUser = async (req, res) => {
     const { id } = req.params;
 
-    const {
-      email, isActive, isVerified, profile,
-    } = req.body;
+    const { email, isActive, isVerified, profile } = req.body;
 
     await UserService.findById(id);
 
@@ -143,7 +139,7 @@ export default class UserController {
         {
           where: { id },
         },
-        { transaction: t },
+        { transaction: t }
       );
 
       await t.commit();
@@ -182,7 +178,7 @@ export default class UserController {
     if (oldPassword === newPassword) {
       throw new ErrorException(
         StatusCode.Bad_Request,
-        'the new password can\'t be the same as the current password',
+        "the new password can't be the same as the current password"
       );
     }
     const updatePassword = await UserService.updatePassword(id, newPassword);

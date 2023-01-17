@@ -12,6 +12,4 @@ Rol.relationship();
 Modules.relationship();
 RefreshToken.relationship();
 
-export {
-  Profile, User, Rol, ProfileRol, RefreshToken, Modules, ProfileModules,
-};
+export { Profile, User, Rol, ProfileRol, RefreshToken, Modules, ProfileModules };

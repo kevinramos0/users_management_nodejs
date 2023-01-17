@@ -53,6 +53,5 @@ module.exports = {
     new DotEnv(),
     new ESLintPlugin(),
     // new Webpack.NoEmitOnErrorsPlugin(),
-
   ],
 };

@@ -12,26 +12,26 @@ const router = Router();
 router.get(
   '/',
   [CheckAuth, checkRole(Rols.adminGetProfile)],
-  asyncHandler(ProfileController.findAll),
+  asyncHandler(ProfileController.findAll)
 );
 router.post(
   '/',
   [CheckAuth, checkRole(Rols.admincreateProfile), ValidateSchema(profileSchema)],
-  asyncHandler(ProfileController.create),
+  asyncHandler(ProfileController.create)
 );
 router.get(
   '/:id',
   [CheckAuth, checkRole(Rols.adminGetProfile, Rols.getProfile)],
-  asyncHandler(ProfileController.findOne),
+  asyncHandler(ProfileController.findOne)
 );
 router.put(
   '/:id',
   [CheckAuth, checkRole(Rols.adminUpdateProfile), ValidateSchema(updateProfileSchema)],
-  asyncHandler(ProfileController.update),
+  asyncHandler(ProfileController.update)
 );
 router.delete(
   '/:id',
   [CheckAuth, checkRole(Rols.adminDeleteProfile)],
-  asyncHandler(ProfileController.delete),
+  asyncHandler(ProfileController.delete)
 );
 export default router;

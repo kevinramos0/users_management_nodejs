@@ -5,19 +5,22 @@ class ProfileModules extends psql.Model {
   static relationship() {}
 }
 /** Inicializar el modelo */
-ProfileModules.init({
-  id_profile: {
-    type: psql.Sequelize.INTEGER,
-    primaryKey: true,
+ProfileModules.init(
+  {
+    id_profile: {
+      type: psql.Sequelize.INTEGER,
+      primaryKey: true,
+    },
+    id_module: {
+      type: psql.Sequelize.INTEGER,
+      primaryKey: true,
+    },
   },
-  id_module: {
-    type: psql.Sequelize.INTEGER,
-    primaryKey: true,
-  },
-}, {
-  timestamps: false,
-  sequelize: DB.connection(),
-  tableName: 'profiles_modules',
-});
+  {
+    timestamps: false,
+    sequelize: DB.connection(),
+    tableName: 'profiles_modules',
+  }
+);
 
 export default ProfileModules;

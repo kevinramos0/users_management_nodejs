@@ -13,17 +13,17 @@ router.get('/', [CheckAuth, checkRole(Rols.adminGetRol)], asyncHandler(RolsContr
 router.post(
   '/',
   [CheckAuth, checkRole(Rols.adminCreateRol), ValidateSchema(createRolSchema)],
-  asyncHandler(RolsController.create),
+  asyncHandler(RolsController.create)
 );
 router.get('/:id', [CheckAuth, checkRole(Rols.adminGetRol)], asyncHandler(RolsController.findOne));
 router.put(
   '/:id',
   [CheckAuth, checkRole(Rols.adminUpdateRol), ValidateSchema(updateRolSchema)],
-  asyncHandler(RolsController.update),
+  asyncHandler(RolsController.update)
 );
 router.delete(
   '/:id',
   [CheckAuth, checkRole(Rols.adminDeleteRol)],
-  asyncHandler(RolsController.delete),
+  asyncHandler(RolsController.delete)
 );
 export default router;

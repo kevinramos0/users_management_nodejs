@@ -11,9 +11,7 @@ import { ProfileService, RolService, ModuleService } from '../services/index.mjs
 
 export default class ProfileController {
   static findAll = async (req, res) => {
-    const {
-      limit = 10, offset = 1, pagination = 'true', name, active,
-    } = req.query;
+    const { limit = 10, offset = 1, pagination = 'true', name, active } = req.query;
     const filter = {};
     const options = {};
 
@@ -72,9 +70,7 @@ export default class ProfileController {
   };
 
   static create = async (req, res) => {
-    const {
-      name, description, rols, modules,
-    } = req.body;
+    const { name, description, rols, modules } = req.body;
 
     const profileExists = await ProfileService.findByName(name);
     if (profileExists) {
@@ -97,7 +93,7 @@ export default class ProfileController {
           description,
           create_at: moment().tz('America/El_Salvador').format(),
         },
-        { transaction: t },
+        { transaction: t }
       );
 
       /** Agregar roles al perfil */
@@ -117,9 +113,7 @@ export default class ProfileController {
 
   static update = async (req, res) => {
     const { id } = req.params;
-    const {
-      name, description, isActive, rols, modules,
-    } = req.body;
+    const { name, description, isActive, rols, modules } = req.body;
 
     const profile = await ProfileService.findById(id);
 
@@ -156,12 +150,12 @@ export default class ProfileController {
             id,
           },
         },
-        { transaction: t },
+        { transaction: t }
       );
       await t.commit();
 
       const profileData = await Profile.getById(id);
-      return res.status(StatusCode.Created).json(profileData);
+      return res.status(StatusCode.OK).json(profileData);
     } catch (error) {
       await t.rollback();
       throw new ErrorException(StatusCode.Bad_Request, error.message);

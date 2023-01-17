@@ -4,10 +4,12 @@ import AjvErrors from 'ajv-errors';
 import { dates } from 'ajv-dates';
 import StatusCode from '../configs/handlers/StatusCode.mjs';
 
-const ajv = dates(new Ajv({
-  allErrors: true,
-  $data: true,
-}));
+const ajv = dates(
+  new Ajv({
+    allErrors: true,
+    $data: true,
+  })
+);
 
 addFormats(ajv);
 AjvErrors(ajv);

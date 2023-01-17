@@ -11,26 +11,26 @@ const router = Router();
 router.get(
   '/',
   [CheckAuth, checkRole(Rols.adminGetModule)],
-  asyncHandler(ModulesController.findAll),
+  asyncHandler(ModulesController.findAll)
 );
 router.post(
   '/',
   [CheckAuth, checkRole(Rols.adminCreateModule), ValidateSchema(createModuleSchema)],
-  asyncHandler(ModulesController.create),
+  asyncHandler(ModulesController.create)
 );
 router.get(
   '/:id',
   [CheckAuth, checkRole(Rols.adminGetModule)],
-  asyncHandler(ModulesController.findOne),
+  asyncHandler(ModulesController.findOne)
 );
 router.put(
   '/:id',
   [CheckAuth, checkRole(Rols.adminUpdateModule), ValidateSchema(updateModuleSchema)],
-  asyncHandler(ModulesController.update),
+  asyncHandler(ModulesController.update)
 );
 router.delete(
   '/:id',
   [CheckAuth, checkRole(Rols.adminDeleteModule)],
-  asyncHandler(ModulesController.delete),
+  asyncHandler(ModulesController.delete)
 );
 export default router;

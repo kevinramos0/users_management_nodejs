@@ -9,9 +9,7 @@ import ErrorException from '../configs/handlers/ErrorExceptions.mjs';
 
 export default class RolsController {
   static findAll = async (req, res) => {
-    const {
-      pagination = 'true', limit = 10, offset = 1, name, active,
-    } = req.query;
+    const { pagination = 'true', limit = 10, offset = 1, name, active } = req.query;
 
     const filter = {};
     const options = {};
@@ -96,7 +94,7 @@ export default class RolsController {
       },
       {
         where: { id },
-      },
+      }
     );
 
     const rolData = await RolService.findById(id);

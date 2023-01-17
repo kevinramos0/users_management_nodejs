@@ -149,7 +149,7 @@ export default class authController {
         where: {
           id,
         },
-      },
+      }
     );
     return res.status(StatusCode.OK).json({
       message: 'User verified successfully',

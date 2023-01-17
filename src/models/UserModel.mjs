@@ -38,10 +38,12 @@ class User extends psql.Model {
         id,
       },
       attributes: { exclude: ['password'] },
-      include: [{
-        model: Profile,
-        attributes: ['id', 'name'],
-      }],
+      include: [
+        {
+          model: Profile,
+          attributes: ['id', 'name'],
+        },
+      ],
     });
   }
 
@@ -69,7 +71,5 @@ User.init(UserSchema, {
   tableName: 'users',
 });
 
-export {
-  UserSchema,
-};
+export { UserSchema };
 export default User;

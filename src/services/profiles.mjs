@@ -17,7 +17,7 @@ export default class ProfileService {
     const profile = await Profile.findOne({
       where: Sequelize.where(
         Sequelize.fn('lower', Sequelize.col('name')),
-        Sequelize.fn('lower', name),
+        Sequelize.fn('lower', name)
       ),
     });
     // if (!profile) throw new ErrorException(StatusCode.NotFound, `Profile ${name} not found`);
@@ -31,7 +31,7 @@ export default class ProfileService {
           { [Op.not]: [{ id }] },
           Sequelize.where(
             Sequelize.fn('lower', Sequelize.col('name')),
-            Sequelize.fn('lower', name),
+            Sequelize.fn('lower', name)
           ),
         ],
       },

@@ -49,8 +49,6 @@ const sendEmailVerifyUser = async (email, token) => {
     </div>`,
     });
   } catch (error) {
-    console.log({ error });
-
     throw new ErrorException(StatusCode.InternalServerError, error);
   }
 };

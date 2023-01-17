@@ -17,7 +17,7 @@ export default class ModuleService {
     const module = await Modules.findOne({
       where: Sequelize.where(
         Sequelize.fn('lower', Sequelize.col('name')),
-        Sequelize.fn('lower', name),
+        Sequelize.fn('lower', name)
       ),
     });
 
@@ -28,18 +28,20 @@ export default class ModuleService {
     const module = await Modules.findOne({
       where: Sequelize.where(
         Sequelize.fn('lower', Sequelize.col(`${field}`)),
-        Sequelize.fn('lower', param),
+        Sequelize.fn('lower', param)
       ),
     });
 
-    if (module) { throw new ErrorException(StatusCode.Bad_Request, `Module already exists with param ${param}`); }
+    if (module) {
+      throw new ErrorException(StatusCode.Bad_Request, `Module already exists with param ${param}`);
+    }
   };
 
   /**
- * @param {*} id id
- * @param {*} field nombre de la columna (name, name_ruta, etc)
- * @param {*} param valor de la columna
- */
+   * @param {*} id id
+   * @param {*} field nombre de la columna (name, name_ruta, etc)
+   * @param {*} param valor de la columna
+   */
   static findInOtherModules = async (id, field, param) => {
     const module = await Modules.findOne({
       where: {
@@ -47,7 +49,7 @@ export default class ModuleService {
           { [Op.not]: [{ id }] },
           Sequelize.where(
             Sequelize.fn('lower', Sequelize.col(`${field}`)),
-            Sequelize.fn('lower', param),
+            Sequelize.fn('lower', param)
           ),
         ],
       },

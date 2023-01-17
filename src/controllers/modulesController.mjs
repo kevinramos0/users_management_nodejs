@@ -8,9 +8,7 @@ import { ModuleService } from '../services/index.mjs';
 
 export default class ModulesController {
   static findAll = async (req, res) => {
-    const {
-      pagination = 'true', limit = 10, offset = 1, name, active,
-    } = req.query;
+    const { pagination = 'true', limit = 10, offset = 1, name, active } = req.query;
 
     const filter = {};
     const options = {};
@@ -58,9 +56,7 @@ export default class ModulesController {
   };
 
   static create = async (req, res) => {
-    const {
-      name, nameRoute, icon, description, isPublic,
-    } = req.body;
+    const { name, nameRoute, icon, description, isPublic } = req.body;
 
     // buscar si existe otro modulo con ese nombre, ruta
     await ModuleService.findByField('name', name);
@@ -81,9 +77,7 @@ export default class ModulesController {
 
   static update = async (req, res) => {
     const { id } = req.params;
-    const {
-      name, nameRoute, icon, description, isActive, isPublic,
-    } = req.body;
+    const { name, nameRoute, icon, description, isActive, isPublic } = req.body;
 
     // verifcar que exista el modulo con ese nombre id
     await ModuleService.findById(id);
@@ -105,7 +99,7 @@ export default class ModulesController {
       },
       {
         where: { id },
-      },
+      }
     );
     const module = await ModuleService.findById(id);
 

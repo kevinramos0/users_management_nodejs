@@ -9,26 +9,29 @@ class RefreshToken extends psql.Model {
   }
 }
 
-RefreshToken.init({
-  id: {
-    type: psql.Sequelize.INTEGER,
-    primaryKey: true,
-    autoIncrement: true,
+RefreshToken.init(
+  {
+    id: {
+      type: psql.Sequelize.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    refresh_token: {
+      type: psql.Sequelize.STRING,
+    },
+    id_user: {
+      type: psql.Sequelize.INTEGER,
+      allowNull: false,
+    },
+    date_valid: {
+      type: psql.Sequelize.DATE,
+    },
   },
-  refresh_token: {
-    type: psql.Sequelize.STRING,
-  },
-  id_user: {
-    type: psql.Sequelize.INTEGER,
-    allowNull: false,
-  },
-  date_valid: {
-    type: psql.Sequelize.DATE,
-  },
-}, {
-  timestamps: false,
-  sequelize: DB.connection(),
-  tableName: 'refresh_token',
-});
+  {
+    timestamps: false,
+    sequelize: DB.connection(),
+    tableName: 'refresh_token',
+  }
+);
 
 export default RefreshToken;

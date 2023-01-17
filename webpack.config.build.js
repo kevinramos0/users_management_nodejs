@@ -43,8 +43,5 @@ module.exports = {
       },
     ],
   },
-  plugins: [
-    new DotEnv(),
-    new CleanWebpackPlugin(),
-  ],
+  plugins: [new DotEnv(), new CleanWebpackPlugin()],
 };

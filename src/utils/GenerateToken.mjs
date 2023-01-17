@@ -7,12 +7,17 @@ import '../configs/env.mjs';
 export default class Auth {
   static async createToken(id) {
     return new Promise((resolve, reject) => {
-      jwt.sign({ id }, process.env.JWT_SECRET, {
-        expiresIn: process.env.TIME_TOKEN,
-      }, (err, token) => {
-        if (err) reject(err);
-        else resolve(token);
-      });
+      jwt.sign(
+        { id },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: process.env.TIME_TOKEN,
+        },
+        (err, token) => {
+          if (err) reject(err);
+          else resolve(token);
+        }
+      );
     });
   }
 
@@ -21,19 +26,27 @@ export default class Auth {
     const result = await RefreshToken.create({
       refresh_token: refreshToken,
       id_user: id,
-      date_valid: moment().add(process.env.TIME_TOKEN_REFRESH, process.env.TYPE_TIME_TOKEN_REFRES).tz('America/El_Salvador').format(),
+      date_valid: moment()
+        .add(process.env.TIME_TOKEN_REFRESH, process.env.TYPE_TIME_TOKEN_REFRES)
+        .tz('America/El_Salvador')
+        .format(),
     });
     return result.refresh_token;
   }
 
   static async createEmailToken(id) {
     return new Promise((resolve, reject) => {
-      jwt.sign({ id }, process.env.EMAIL_TOKEN, {
-        expiresIn: process.env.TIME_TOKEN_EMAIL,
-      }, (err, tokenEmail) => {
-        if (err) reject(err);
-        else resolve(tokenEmail);
-      });
+      jwt.sign(
+        { id },
+        process.env.EMAIL_TOKEN,
+        {
+          expiresIn: process.env.TIME_TOKEN_EMAIL,
+        },
+        (err, tokenEmail) => {
+          if (err) reject(err);
+          else resolve(tokenEmail);
+        }
+      );
     });
   }
 }

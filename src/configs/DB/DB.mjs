@@ -8,11 +8,16 @@ export default class db {
     if (connection) config = dbConfig.connections[connection];
     else config = dbConfig.connections[predefinida];
 
-    return new Sequelize(config.options.db_name, config.options.db_username, config.options.db_password, {
-      host: config.options.db_host,
-      port: config.options.db_port,
-      dialect: config.motor,
-    });
+    return new Sequelize(
+      config.options.db_name,
+      config.options.db_username,
+      config.options.db_password,
+      {
+        host: config.options.db_host,
+        port: config.options.db_port,
+        dialect: config.motor,
+      }
+    );
   }
 
   static async testing(connection = null) {

@@ -17,7 +17,7 @@ export default class RolService {
     const rol = await Rol.findOne({
       where: Sequelize.where(
         Sequelize.fn('lower', Sequelize.col('name')),
-        Sequelize.fn('lower', name),
+        Sequelize.fn('lower', name)
       ),
     });
 
@@ -31,7 +31,7 @@ export default class RolService {
           { [Op.not]: [{ id }] },
           Sequelize.where(
             Sequelize.fn('lower', Sequelize.col('name')),
-            Sequelize.fn('lower', name),
+            Sequelize.fn('lower', name)
           ),
         ],
       },
@@ -51,11 +51,13 @@ export default class RolService {
   static getRolsToProfile = async (profile) => {
     const rols = await Rol.findAll({
       attributes: ['id', 'name'],
-      include: [{
-        model: Profile,
-        where: { id: profile },
-        attributes: [],
-      }],
+      include: [
+        {
+          model: Profile,
+          where: { id: profile },
+          attributes: [],
+        },
+      ],
     });
 
     return rols;

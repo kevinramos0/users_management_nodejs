@@ -1,21 +1,21 @@
 import { Sequelize } from 'sequelize';
-import dbConfig from '../db.mjs';
+import config from '../db.mjs';
 
 export default class db {
   static connection(connection = null) {
-    const predefinida = dbConfig.default;
-    let config = {};
-    if (connection) config = dbConfig.connections[connection];
-    else config = dbConfig.connections[predefinida];
+    const predefinida = config.default;
+    let dbConfig = {};
+    if (connection) dbConfig = config.connections[connection];
+    else dbConfig = config.connections[predefinida];
 
     return new Sequelize(
-      config.options.db_name,
-      config.options.db_username,
-      config.options.db_password,
+      dbConfig.options.db_name,
+      dbConfig.options.db_username,
+      dbConfig.options.db_password,
       {
-        host: config.options.db_host,
-        port: config.options.db_port,
-        dialect: config.motor,
+        host: dbConfig.options.db_host,
+        port: dbConfig.options.db_port,
+        dialect: dbConfig.motor,
       }
     );
   }

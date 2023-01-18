@@ -31,7 +31,6 @@ module.exports = {
       deleted_at: {
         type: DataTypes.DATE,
       },
-
     });
   },
 

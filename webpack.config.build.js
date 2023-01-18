@@ -25,11 +25,8 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.mjs'],
     alias: {
-      '@src': path.resolve(__dirname, 'src/'),
-      '@configs': path.resolve(__dirname, 'src/configs/'),
-      '@public': path.resolve(__dirname, 'public/'),
-      '@routes': path.resolve(__dirname, 'src/routes/'),
-      '@validators': path.resolve(__dirname, 'src/validators/'),
+      '@Src': path.resolve(__dirname, 'src/'),
+      '@Public': path.resolve(__dirname, 'public/'),
     },
   },
   module: {

@@ -1,9 +1,7 @@
 import psql from 'sequelize';
 import DB from '../configs/DB/DB.mjs';
 
-class ProfileRol extends psql.Model {
-  static relationship() {}
-}
+class ProfileRol extends psql.Model {}
 /** Inicializar el modelo */
 ProfileRol.init(
   {

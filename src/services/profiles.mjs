@@ -39,35 +39,4 @@ export default class ProfileService {
 
     if (profile) throw new ErrorException(StatusCode.Bad_Request, `Profile ${name} already exists`);
   };
-
-  // static addRols = async (idProfile, rols = []) => {
-  //   const connection = DB.connection();
-  //   // transaction se usa para ejecutar la operacion solo si cumple todos las condiciones
-  //   // si ocurre un error no realiza la operacion
-  //   const t = await connection.transaction();
-
-  //   try {
-  //     // eslint-disable-next-line no-plusplus
-  //     for (let index = 0; index < rols.length; index++) {
-  //       // eslint-disable-next-line no-await-in-loop
-  //       await RolService.findById(rols[index]);
-  //     }
-
-  //     // eslint-disable-next-line no-restricted-syntax
-  //     for (const rol of rols) {
-  //       // eslint-disable-next-line no-await-in-loop
-  //       await ProfileRol.create(
-  //         { id_profile: idProfile, id_rol: rol },
-  //         {
-  //           transaction: t,
-  //         },
-  //       );
-  //     }
-  //     await t.commit();
-  //     return rols;
-  //   } catch (error) {
-  //     await t.rollback();
-  //     throw new ErrorException(StatusCode.Bad_Request, error.message);
-  //   }
-  // };
 }

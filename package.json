@@ -5,8 +5,8 @@
   "main": "app.mjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "rm -rf dist && webpack --config webpack.config.js",
-    "build": "rm -rf dist && webpack --config webpack.config.build.js",
+    "server": "webpack --config webpack.config.js",
+    "build": "webpack --config webpack.config.build.js",
     "dev": "nodemon app.mjs",
     "start": "node ./dist/server.js",
     "swagger": "yamlinc -o ./src/docs/index.yaml ./src/docs/swagger/includes.yaml && yaml2json ./src/docs/index.yaml > ./src/docs/index.json",
@@ -20,6 +20,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/runtime": "^7.20.7",
     "ajv": "^8.11.0",
     "ajv-dates": "^1.1.0",
     "ajv-errors": "^3.0.0",
@@ -46,7 +47,6 @@
     "@babel/core": "^7.18.10",
     "@babel/plugin-transform-runtime": "^7.18.10",
     "@babel/preset-env": "^7.18.10",
-    "@babel/runtime": "^7.20.7",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.2.5",
     "babel-register": "^6.26.0",

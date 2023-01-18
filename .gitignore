@@ -4,8 +4,8 @@
 .env
 package-lock.json
 ./package-lock.json
-./src/docs/index.json
-./src/docs/index.yaml
+/src/docs/index.json
+/src/docs/index.yaml
 
 # Logs
 logs

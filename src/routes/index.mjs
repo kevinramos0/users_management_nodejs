@@ -13,10 +13,10 @@ router.use('/users', User);
 router.use('/rols', Rols);
 router.use('/modules', Modules);
 
-router.get('*', (req, res, next) => {
-  // res.status(404);
-  // res.send({ error: 'Recurso No Encontrado' });
-  setImmediate(() => next(new Error('Recurso No Encontrado')));
-});
+// router.get('*', (req, res, next) => {
+//   // res.status(404);
+//   // res.send({ error: 'Recurso No Encontrado' });
+//   setImmediate(() => next(new Error('Recurso No Encontrado')));
+// });
 
 export default router;

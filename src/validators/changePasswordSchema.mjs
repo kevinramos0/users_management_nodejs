@@ -7,22 +7,29 @@ const changePasswordSchema = {
         type: 'Field oldPassword should alphanumeric',
       },
     },
-    newPassword: {
+    password: {
       type: 'string',
       minLength: 7,
       pattern: '(?:(?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$',
       errorMessage: {
-        type: 'Field newPassword should alphanumeric',
-        minLength: 'Field newPassword must contain a minimum of 7 characters',
-        pattern: 'Field newPassword must have a Uppercase, lowercase letter and a number',
+        type: 'Field password should alphanumeric',
+        minLength: 'Field password must contain a minimum of 7 characters',
+        pattern: 'Field password must have a Uppercase, lowercase letter and a number',
+      },
+    },
+    confirmPassword: {
+      type: 'string',
+      errorMessage: {
+        type: 'Field confirmPassword should alphanumeric',
       },
     },
   },
-  required: ['oldPassword', 'newPassword'],
+  required: ['oldPassword', 'password', 'confirmPassword'],
   errorMessage: {
     required: {
       oldPassword: 'oldPassword is required',
-      password: 'newPassword is required',
+      password: 'password is required',
+      Confirmpassword: 'confirmPassword is required',
     },
   },
 };

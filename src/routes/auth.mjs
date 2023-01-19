@@ -17,6 +17,6 @@ router.post(
   asyncHandler(authController.saveNewPassword)
 );
 router.post('/verify/account/:token', asyncHandler(authController.verifyUser));
-router.post('/refresh/:refreshToken', [CheckAuth], asyncHandler(authController.refreshToken));
+router.post('/refresh/:refreshToken', asyncHandler(authController.refreshToken));
 
 export default router;

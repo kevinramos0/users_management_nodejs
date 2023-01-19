@@ -168,20 +168,22 @@ export default class UserController {
 
   static changePassword = async (req, res) => {
     const { id } = req.user;
-    const { oldPassword, newPassword } = req.body;
+    const { oldPassword, password, confirmPassword } = req.body;
 
     const user = await User.findByPk(id);
 
+    if (password !== confirmPassword)
+      throw new ErrorException(StatusCode.Bad_Request, `Confim password doesn't match`);
     // Check old password
     await comparar(oldPassword, user.password, "Current password doesn't match");
 
-    if (oldPassword === newPassword) {
+    if (oldPassword === password) {
       throw new ErrorException(
         StatusCode.Bad_Request,
         "the new password can't be the same as the current password"
       );
     }
-    const updatePassword = await UserService.updatePassword(id, newPassword);
+    const updatePassword = await UserService.updatePassword(id, password);
 
     return res.status(StatusCode.OK).json(updatePassword);
   };

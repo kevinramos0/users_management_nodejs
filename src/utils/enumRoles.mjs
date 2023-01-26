@@ -6,6 +6,7 @@ const Rols = Object.freeze({
   getUser: 'Get User',
   updateUser: 'Update User',
   getProfile: 'Get Profile',
+  getModule: 'Get Module',
 
   // roles administrativos (coadmin, etc)
   adminCreateUser: 'Admin Create User',

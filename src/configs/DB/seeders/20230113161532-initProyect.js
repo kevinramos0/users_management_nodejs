@@ -35,6 +35,11 @@ module.exports = {
             created_at: moment().tz('America/El_Salvador').format(),
           },
           {
+            name: 'Get Module',
+            is_active: true,
+            created_at: moment().tz('America/El_Salvador').format(),
+          },
+          {
             name: 'Admin Get User',
             is_active: true,
             created_at: moment().tz('America/El_Salvador').format(),

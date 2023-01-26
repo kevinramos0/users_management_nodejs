@@ -10,7 +10,7 @@ import Rols from '../utils/enumRoles.mjs';
 const router = Router();
 router.get(
   '/',
-  [CheckAuth, checkRole(Rols.adminGetModule)],
+  [CheckAuth, checkRole(Rols.adminGetModule, Rols.getModule)],
   asyncHandler(ModulesController.findAll)
 );
 router.post(

@@ -21,7 +21,8 @@ const createUserSchema = {
     },
     profile: {
       type: 'integer',
-      minimum: 0,
+      minimum: 1,
+      nullable: true,
       errorMessage: {
         type: 'Field profile should a integer',
         minimun: 'Field profile should be a number positive',
@@ -60,7 +61,8 @@ const updateUserSchema = {
     },
     profile: {
       type: 'integer',
-      minimum: 0,
+      minimum: 1,
+      nullable: true,
       errorMessage: {
         type: 'Field profile should a integer',
         minimun: 'Field profile should be a number positive',

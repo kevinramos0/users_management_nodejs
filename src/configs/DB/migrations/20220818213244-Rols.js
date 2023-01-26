@@ -14,7 +14,7 @@ module.exports = {
         unique: true,
       },
       description: {
-        type: DataTypes.STRING(100),
+        type: DataTypes.STRING(150),
         allowNull: true,
       },
       is_active: {

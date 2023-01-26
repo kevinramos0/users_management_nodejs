@@ -14,11 +14,134 @@ module.exports = {
             is_active: true,
             created_at: moment().tz('America/El_Salvador').format(),
           },
+          {
+            name: 'Create User',
+            is_active: true,
+            created_at: moment().tz('America/El_Salvador').format(),
+          },
+          {
+            name: 'Get User',
+            is_active: true,
+            created_at: moment().tz('America/El_Salvador').format(),
+          },
+          {
+            name: 'Update User',
+            is_active: true,
+            created_at: moment().tz('America/El_Salvador').format(),
+          },
+          {
+            name: 'Get Profile',
+            is_active: true,
+            created_at: moment().tz('America/El_Salvador').format(),
+          },
+          {
+            name: 'Admin Get User',
+            is_active: true,
+            created_at: moment().tz('America/El_Salvador').format(),
+          },
+          {
+            name: 'Admin Create User',
+            is_active: true,
+            created_at: moment().tz('America/El_Salvador').format(),
+          },
+          {
+            name: 'Admin Update User',
+            is_active: true,
+            created_at: moment().tz('America/El_Salvador').format(),
+          },
+          {
+            name: 'Admin Delete User',
+            is_active: true,
+            created_at: moment().tz('America/El_Salvador').format(),
+          },
+          {
+            name: 'Admin Restore User',
+            is_active: true,
+            created_at: moment().tz('America/El_Salvador').format(),
+          },
+          // ROLES FOR ADMIN PROFILES
+          {
+            name: 'Admin Get Profile',
+            is_active: true,
+            created_at: moment().tz('America/El_Salvador').format(),
+          },
+          {
+            name: 'Admin Create Profile',
+            is_active: true,
+            created_at: moment().tz('America/El_Salvador').format(),
+          },
+          {
+            name: 'Admin Update Profile',
+            is_active: true,
+            created_at: moment().tz('America/El_Salvador').format(),
+          },
+          {
+            name: 'Admin Delete Profile',
+            is_active: true,
+            created_at: moment().tz('America/El_Salvador').format(),
+          },
+          {
+            name: 'Admin Restore Profile',
+            is_active: true,
+            created_at: moment().tz('America/El_Salvador').format(),
+          },
+          // ROLES FOR ADMIN ROLS
+          {
+            name: 'Admin Get Rol',
+            is_active: true,
+            created_at: moment().tz('America/El_Salvador').format(),
+          },
+          {
+            name: 'Admin Create Rol',
+            is_active: true,
+            created_at: moment().tz('America/El_Salvador').format(),
+          },
+          {
+            name: 'Admin Update Rol',
+            is_active: true,
+            created_at: moment().tz('America/El_Salvador').format(),
+          },
+          {
+            name: 'Admin Delete Rol',
+            is_active: true,
+            created_at: moment().tz('America/El_Salvador').format(),
+          },
+          {
+            name: 'Admin Restore Rol',
+            is_active: true,
+            created_at: moment().tz('America/El_Salvador').format(),
+          },
+          // ROLES FOR ADMIN MODULES
+          {
+            name: 'Admin Get Module',
+            is_active: true,
+            created_at: moment().tz('America/El_Salvador').format(),
+          },
+          {
+            name: 'Admin Create Module',
+            is_active: true,
+            created_at: moment().tz('America/El_Salvador').format(),
+          },
+          {
+            name: 'Admin Update Module',
+            is_active: true,
+            created_at: moment().tz('America/El_Salvador').format(),
+          },
+          {
+            name: 'Admin Delete Module',
+            is_active: true,
+            created_at: moment().tz('America/El_Salvador').format(),
+          },
+          {
+            name: 'Admin Restore Module',
+            is_active: true,
+            created_at: moment().tz('America/El_Salvador').format(),
+          },
         ],
         {
           returning: ['id'],
           transaction: TRANSACTION,
-        },
+        }
       );
       const Modules = await queryInterface.bulkInsert(
         'modules',
@@ -54,7 +177,7 @@ module.exports = {
         {
           returning: ['id'],
           transaction: TRANSACTION,
-        },
+        }
       );
 
       const [Profile] = await queryInterface.bulkInsert(
@@ -70,7 +193,7 @@ module.exports = {
         {
           returning: ['id'],
           transaction: TRANSACTION,
-        },
+        }
       );
       // eslint-disable-next-line no-unused-vars
       await queryInterface.bulkInsert(
@@ -88,7 +211,7 @@ module.exports = {
         {
           returning: ['id'],
           transaction: TRANSACTION,
-        },
+        }
       );
 
       /** ASIGNAR ROL DE ADMIN AL USUARIO ADMINISTRATOR */
@@ -98,7 +221,7 @@ module.exports = {
         {
           returning: ['id_profile', 'id_rol'],
           transaction: TRANSACTION,
-        },
+        }
       );
 
       /** ASIGNAR MODULOS AL USUARIO ADMINISTRATOR */
@@ -111,7 +234,7 @@ module.exports = {
         {
           returning: ['id_profile', 'id_module'],
           transaction: TRANSACTION,
-        },
+        }
       );
       await TRANSACTION.commit();
     } catch (e) {

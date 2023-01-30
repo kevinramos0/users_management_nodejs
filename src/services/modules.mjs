@@ -1,3 +1,4 @@
+/* eslint-disable no-await-in-loop */
 // import DB from '../configs/DB/DB.mjs';
 import { Sequelize, Op } from 'sequelize';
 import ErrorException from '../configs/handlers/ErrorExceptions.mjs';
@@ -59,9 +60,7 @@ export default class ModuleService {
   };
 
   static checkModules = async (modules) => {
-    // eslint-disable-next-line no-plusplus
-    for (let index = 0; index < modules.length; index++) {
-      // eslint-disable-next-line no-await-in-loop
+    for (let index = 0; index < modules.length; index += 1) {
       await this.findById(modules[index]);
     }
   };
@@ -83,9 +82,7 @@ export default class ModuleService {
 
   static deleteProfileModules = async (profile) => {
     const modules = await this.getModulesProfile(profile);
-    // eslint-disable-next-line no-plusplus
-    for (let index = 0; index < modules.length; index++) {
-      // eslint-disable-next-line no-await-in-loop
+    for (let index = 0; index < modules.length; index += 1) {
       await ProfileModules.destroy({
         where: {
           id_profile: profile,

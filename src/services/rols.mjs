@@ -1,3 +1,4 @@
+/* eslint-disable no-await-in-loop */
 // import DB from '../configs/DB/DB.mjs';
 import { Sequelize, Op } from 'sequelize';
 import ErrorException from '../configs/handlers/ErrorExceptions.mjs';
@@ -41,9 +42,7 @@ export default class RolService {
   };
 
   static checkRols = async (rols) => {
-    // eslint-disable-next-line no-plusplus
-    for (let index = 0; index < rols.length; index++) {
-      // eslint-disable-next-line no-await-in-loop
+    for (let index = 0; index < rols.length; index += 1) {
       await this.findById(rols[index]);
     }
   };
@@ -65,9 +64,7 @@ export default class RolService {
 
   static deleteProfileRols = async (profile) => {
     const rols = await this.getRolsToProfile(profile);
-    // eslint-disable-next-line no-plusplus
-    for (let index = 0; index < rols.length; index++) {
-      // eslint-disable-next-line no-await-in-loop
+    for (let index = 0; index < rols.length; index += 1) {
       await ProfileRol.destroy({
         where: {
           id_profile: profile,

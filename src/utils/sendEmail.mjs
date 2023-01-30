@@ -9,41 +9,43 @@ const sendEmailVerifyUser = async (email, token) => {
     transport.sendMail({
       from: `${process.env.EMAIL}`,
       to: `${email}`,
-      subject: 'Confirma tu cuenta',
+      subject: 'Welcome!',
       html: `<div
-      style="background-color: #f5f3f2; border-radius: 5px; text-align: center">
+      style="text-align: center">
       <br />
       <img src = "./img/logo.svg" alt="logo" width="350px"/>
-      <h2>Necesitas Verificar tu cuenta</h2>
+      <h2 style="color: #448AFF;">Please verify your email</h2>
         <p
           style="
-            background-color: #a64a4a;
-            color: white;
+            color:  #448AFF;
             font-size: 18px;
-            width: 250px;
-            text-align: center;
-            display: inline-block;
-            border-radius: 5px">
-          Hola ${email}
+            width: auto;
+            display: inline-block;">
+          Hi ${email}
         </p>
         <p>
-        Para confirmar tu cuenta debes hacer click en el siguiente enlace
-      </p>
+        To confirm your account you must click on the following link
+        </p>
       <a href="${url}">
         <button
         style="
-        background-color: #a64a4a;
+        background-color: #448AFF;
         color: white;
         font-size: 18px;
         width: 250px;
-        height: 40px;
-        border-radius: 8px">
-          Confirmar cuenta
+        padding: 6px;
+        border-radius: 100px;
+        border-width: 0;
+        box-shadow: none;
+        box-sizing: border-box;
+        cursor: pointer;
+        border-radius: 1rem">
+        Verify my account
         </button>
       </a>
       <br />
         <p>
-          Este correo tiene una validez de 15 minutos
+        This email is valid for 15 minutes.
         </p>
         <br />
     </div>`,
@@ -59,45 +61,47 @@ const sendEmailResetPassword = async (email, token) => {
     transport.sendMail({
       from: `${process.env.EMAIL}`,
       to: `${email}`,
-      subject: 'Cambiar contraseña',
-      html: ` <div
-      style="background-color: #f5f3f2; border-radius: 5px; text-align: center">
+      subject: 'Password Reset',
+      html: `<div
+      style="text-align: center">
       <br />
       <img src = "./img/logo.svg" alt="logo" width="350px"/>
-      <h2>Solicitud de cambio de contraseña</h2>
+      <h2 style="color: #448AFF;">Forgot your password?</h2>
         <p
           style="
-            background-color: #a64a4a;
-            color: white;
+          color:  #448AFF;
             font-size: 18px;
-            width: 250px;
-            text-align: center;
-            display: inline-block;
-            border-radius: 5px">
+            width: auto;
+            display: inline-block;">
           ${email}
         </p>
         <p>
-        Para cambiar tu contraseña debes hacer click en el siguiente enlace
+        To change your password you must click on the following link
       </p>
       <a href="${url}">
         <button
           style="
-            background-color: #a64a4a;
-            color: white;
-            font-size: 18px;
-            width: 250px;
-            height: 40px;
-            border-radius: 8px">
-          Cambiar Contraseña
+          background-color: #448AFF;
+          color: white;
+          font-size: 18px;
+          width: 250px;
+          padding: 6px;
+          border-radius: 100px;
+          border-width: 0;
+          box-shadow: none;
+          box-sizing: border-box;
+          cursor: pointer;
+          border-radius: 1rem">
+          Reset my password
         </button>
       </a>
       <br />
         <p>
-          ¿No has solicitado este cambio? <br />
-          Omite este correo y tu contraseña seguirá siendo la misma.
+        Haven't you requested this change? <br /> <br />
+        Ignore this email and your password will remain the same.
         </p>
         <p>
-          Este correo tiene una validez de 15 minutos
+        This email is valid for 15 minutes.
         </p>
         <br />
     </div>`,

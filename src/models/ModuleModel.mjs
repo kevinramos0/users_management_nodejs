@@ -43,6 +43,7 @@ class Modules extends psql.Model {
       through: ProfileModules,
       foreignKey: 'id_module',
       otherKey: 'id_profile',
+      as: 'modules',
     });
   }
 

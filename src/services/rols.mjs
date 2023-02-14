@@ -53,6 +53,7 @@ export default class RolService {
       include: [
         {
           model: Profile,
+          as: 'rols',
           where: { id: profile },
           attributes: [],
         },

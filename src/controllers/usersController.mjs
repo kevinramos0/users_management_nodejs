@@ -42,6 +42,7 @@ export default class UserController {
       include: [
         {
           model: Profile,
+          as: 'profile',
           attributes: ['id', 'name'],
         },
       ],

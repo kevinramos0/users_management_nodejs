@@ -20,6 +20,7 @@ export default class authController {
       include: [
         {
           model: Profile,
+          as: 'profile',
           attributes: ['id', 'is_active'],
         },
       ],
@@ -46,7 +47,7 @@ export default class authController {
         .json({ message: `Please check the email ${user.email} for verify your account` });
     }
 
-    if (!user.Profile || !user.Profile.is_active) {
+    if (!user.profile || !user.profile.is_active) {
       throw new ErrorException(StatusCode.Bad_Request, "User don't have a profile valid assigned");
     }
 

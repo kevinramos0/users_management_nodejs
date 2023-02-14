@@ -6,11 +6,11 @@ import Rols from '../utils/enumRoles.mjs';
 const checkRole = (roles) => async (req, res, next) => {
   try {
     const user = await UserService.findById(req.user.id);
-    const profile = await ProfileService.findById(user.Profile.id);
+    const profile = await ProfileService.findById(user.profile.id);
 
-    if (!profile.Rols) throw new ErrorException(StatusCode.Forbidden, 'Forbidden');
+    if (!profile.rols) throw new ErrorException(StatusCode.Forbidden, 'Forbidden');
     // obtener array de roles del usuario
-    const namesRoles = profile.Rols.map((rol) => rol.name);
+    const namesRoles = profile.rols.map((rol) => rol.name);
 
     // comparar array de roles del perfil con roles que tienen acceso
     const filtro = [...namesRoles.filter((p) => roles.includes(p))];

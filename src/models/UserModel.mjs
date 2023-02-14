@@ -28,8 +28,8 @@ const UserSchema = {
 class User extends psql.Model {
   /** crear relacion del modelo */
   static relationship() {
-    this.belongsTo(Profile, { foreignKey: 'id_profile' });
-    this.hasOne(RefreshToken, { foreignKey: 'id_user' });
+    this.belongsTo(Profile, { foreignKey: 'id_profile', as: 'profile' });
+    this.hasOne(RefreshToken, { foreignKey: 'id_user', as: 'token' });
   }
 
   static async getById(id) {
@@ -41,6 +41,7 @@ class User extends psql.Model {
       include: [
         {
           model: Profile,
+          as: 'profile',
           attributes: ['id', 'name'],
         },
       ],
@@ -53,7 +54,7 @@ class User extends psql.Model {
       email: this.email,
       isActive: this.is_active,
       isVerified: this.is_verified,
-      profile: this.Profile,
+      profile: this.profile,
       createdAt: this.created_at,
       updatedAt: this.updated_at,
       // deletedAt: this.deleted_at,

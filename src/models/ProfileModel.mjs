@@ -28,13 +28,15 @@ class Profile extends psql.Model {
       through: ProfileRol,
       foreignKey: 'id_profile',
       otherKey: 'id_rol',
+      as: 'rols',
     });
     this.belongsToMany(Modules, {
       through: ProfileModules,
       foreignKey: 'id_profile',
       otherKey: 'id_module',
+      as: 'modules',
     });
-    this.hasMany(User, { foreignKey: 'id_profile' });
+    this.hasMany(User, { foreignKey: 'id_profile', as: 'user' });
   }
 
   static async getById(id) {
@@ -45,10 +47,12 @@ class Profile extends psql.Model {
       include: [
         {
           model: Rol,
+          as: 'rols',
           attributes: ['id', 'name'],
         },
         {
           model: Modules,
+          as: 'modules',
           attributes: ['id', 'name'],
         },
       ],
@@ -64,8 +68,8 @@ class Profile extends psql.Model {
       createdAt: this.created_at,
       updatedAt: this.updated_at,
       // deletedAt: this.deleted_at,
-      rols: this.Rols,
-      modules: this.Modules,
+      rols: this.rols,
+      modules: this.modules,
     };
   }
 }

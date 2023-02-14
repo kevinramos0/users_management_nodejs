@@ -71,6 +71,7 @@ export default class ModuleService {
       include: [
         {
           model: Profile,
+          as: 'modules',
           where: { id: profile },
           attributes: [],
         },

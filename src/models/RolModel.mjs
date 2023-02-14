@@ -22,6 +22,7 @@ class Rol extends psql.Model {
       through: ProfileRol,
       foreignKey: 'id_rol',
       otherKey: 'id_profile',
+      as: 'rols',
     });
   }
 

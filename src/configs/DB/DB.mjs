@@ -16,6 +16,7 @@ export default class db {
         host: dbConfig.options.db_host,
         port: dbConfig.options.db_port,
         dialect: dbConfig.motor,
+        logging: false,
       }
     );
   }

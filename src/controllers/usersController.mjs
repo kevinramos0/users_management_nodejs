@@ -12,7 +12,7 @@ import { UserService, ProfileService } from '../services/index.mjs';
 
 export default class UserController {
   static findAll = async (req, res) => {
-    const { limit = 10, offset = 1, pagination = 'true', email, active } = req.query;
+    const { limit = 10, offset = 1, pagination = 'true', email, active, verified } = req.query;
     const filter = {};
     const options = {};
 
@@ -33,11 +33,17 @@ export default class UserController {
       ? (filter.isActive = !(active === 'false'))
       : (filter.isActive = { [Op.or]: ['false', 'true'] });
 
+    // eslint-disable-next-line no-unused-expressions
+    verified
+      ? (filter.isVerified = !(verified === 'false'))
+      : (filter.isVerified = { [Op.or]: ['false', 'true'] });
+
     const { rows: users, count: total } = await User.findAndCountAll({
       ...options,
       where: {
         email: filter.email,
         is_active: filter.isActive,
+        is_verified: filter.isVerified,
       },
       include: [
         {

@@ -33,6 +33,11 @@
         schema:
           type: boolean
         description: search for status users
+      - in: query
+        name: verified
+        schema:
+          type: boolean
+        description: search for users verified
     responses:
       200:
         description: OK

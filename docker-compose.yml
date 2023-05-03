@@ -1,0 +1,43 @@
+# docker-compose.yml
+version: "3"
+networks:
+  app-users:
+    driver: bridge
+services:
+  api-users-management:
+    build: .
+    depends_on:
+      - postgres
+    environment:
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_USER: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_DATABASE}
+      NODE_ENV: ${NODE_ENV}
+      PORT: ${PORT}
+    ports:
+      - ${PORT}:${PORT}
+    command: npm run dev
+    volumes:
+      - .:/app/
+      - /app/node_modules
+    env_file:
+      - .env
+    networks:
+      - app-users
+  postgres:
+    image: postgres:10.4
+    ports:
+      - ${DB_PORT}:5432
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASE}
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+    env_file:
+      - .env
+    networks:
+      - app-users

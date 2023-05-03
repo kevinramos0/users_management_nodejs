@@ -17,6 +17,7 @@ import ErrorException from './handlers/ErrorExceptions.mjs';
 import StatusCode from './handlers/StatusCode.mjs';
 import ErrorHandler from './handlers/ErrorHandler.mjs';
 import corsConfig from './cors.mjs';
+// import DB from './DB/DB.mjs';
 
 class Server {
   constructor() {

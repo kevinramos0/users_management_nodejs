@@ -8,7 +8,7 @@
     "server": "webpack --config webpack.config.js",
     "build": "webpack --config webpack.config.build.js",
     "dev": "nodemon app.mjs",
-    "start": "node ./dist/server.js",
+    "start": "node app.mjs",
     "swagger": "yamlinc -o ./src/docs/index.yaml ./src/docs/swagger/includes.yaml && yaml2json ./src/docs/index.yaml > ./src/docs/index.json",
     "migrate:generate": "sequelize-cli migration:generate --name",
     "migrate": "sequelize-cli db:migrate",
